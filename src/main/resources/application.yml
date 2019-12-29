@@ -1,0 +1,55 @@
+server:
+  port: 19103
+spring:
+  application:
+    name: enrolment-service
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/genuniv_enrolment
+    username: postgres
+    password: password
+    maximum-pool-size: 50
+    driver-class-name: org.postgresql.Driver
+  redis:
+    host: localhost
+    port: 6379
+#  jpa:
+#    show-sql: true
+#  flyway:
+#    clean-on-validation-error: true
+intra:
+  service:
+    GeneralInfo:
+      protocol: http
+      service-name: general-info-service
+      SchoolYearAPI:
+        api-prefix: /api/v1/school-year
+      SchoolPeriodAPI:
+        api-prefix: /api/v1/school-period
+      ScheduleAPI:
+        api-prefix: /api/v1/schedule
+    College:
+      protocol: http
+      service-name: college-service
+      CollegeApi:
+        api-prefix: /api/v1/college
+      DegreeApi:
+        api-prefix: /api/v1/degree
+      DegreeTypeApi:
+        api-prefix: /api/v1/degree-type
+      CourseApi:
+        api-prefix: /api/v1/course
+      OfferingApi:
+        api-prefix: /api/v1/offering
+    PersonalRecords:
+      protocol: http
+      service-name: personal-records-service
+      FacultyApi:
+        api-prefix: /api/v1/faculty
+      StaffApi:
+        api-prefix: /api/v1/staff
+      StudentApi:
+        api-prefix: /api/v1/student
+loading-cache:
+  slow-interval: 30
+  fast-interval: 10
