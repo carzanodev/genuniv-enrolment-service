@@ -32,6 +32,7 @@ public class EnrolmentCounterRepository {
         if (valueNow > limit) {
             throw new CapacityExceededException(key, limit);
         } else {
+            counter.persist();
             return valueNow;
         }
     }
@@ -43,7 +44,10 @@ public class EnrolmentCounterRepository {
             throw new InexistentCounterException(key);
         }
 
-        return counter.decrementAndGet();
+        int valueNow = counter.decrementAndGet();
+        counter.persist();
+
+        return valueNow;
     }
 
     private RedisAtomicInteger getAtomicCounter(String key) {

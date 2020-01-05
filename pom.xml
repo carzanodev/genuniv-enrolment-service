@@ -49,6 +49,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>genuniv-enrolment-service</finalName>
     </build>
 
 </project>
