@@ -15,7 +15,6 @@ import carzanodev.genuniv.microservices.enrolment.config.CustomExceptionHandler.
 public class EnrolmentCounterRepository {
 
     private static final String ENROLMENT_COUNTER_PREFIX = "EC#";
-    private static int STARTING_COUNTER_VALUE = 0;
 
     private final Map<String, RedisAtomicInteger> enrolmentCounterMap = new ConcurrentHashMap<>();
     private final RedisConnectionFactory factory;
@@ -32,7 +31,6 @@ public class EnrolmentCounterRepository {
         if (valueNow > limit) {
             throw new CapacityExceededException(key, limit);
         } else {
-            counter.persist();
             return valueNow;
         }
     }
@@ -45,7 +43,6 @@ public class EnrolmentCounterRepository {
         }
 
         int valueNow = counter.decrementAndGet();
-        counter.persist();
 
         return valueNow;
     }
@@ -58,7 +55,7 @@ public class EnrolmentCounterRepository {
         RedisAtomicInteger counter = enrolmentCounterMap.get(key);
 
         if (counter == null && isCreateOnNull) {
-            counter = new RedisAtomicInteger(key, factory, STARTING_COUNTER_VALUE);
+            counter = new RedisAtomicInteger(key, factory);
         }
 
         return counter;
