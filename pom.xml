@@ -10,7 +10,7 @@
     </parent>
     <groupId>carzanodev.genuniv.microservices</groupId>
     <artifactId>genuniv-enrolment-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>genuniv-enrolment-service</name>
     <description>Generic University - Enrolment Service</description>
 
