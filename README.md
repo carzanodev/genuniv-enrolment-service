@@ -81,3 +81,14 @@ Result:
     }
 }
 ```
+
+# Atomic Counter
+In order to make sure that enrolments from possibly multiple instances of enrolment-service sync-up correctly with their maximum capacity, the atomic integer of Redis is used. The atomic integer has synchronized increment/decrement within the Redis server, making it perfect for handling the job of managing the capacity of an offering from multiple enrolment-service enrolment.
+
+In order to check for the capacity of an offering in Redis, we use the key prefix `EC#`, followed by the offering ID.
+
+Example:
+```shell script
+127.0.0.1:6379> get EC#1
+"1"
+```

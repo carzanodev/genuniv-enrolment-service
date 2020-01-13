@@ -2,6 +2,8 @@ package carzanodev.genuniv.microservices.enrolment.api.enrolment;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -21,10 +23,11 @@ public class StudentEnrolmentDTO {
 
     @Data
     @AllArgsConstructor
+    @JsonInclude(Include.NON_NULL)
     public static class EnrolmentDTO {
 
         @JsonProperty("id")
-        private long id;
+        private Long id;
 
         @JsonProperty("offering_id")
         private long offeringId;

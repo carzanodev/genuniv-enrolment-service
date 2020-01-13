@@ -14,13 +14,14 @@ import carzanodev.genuniv.microservices.common.config.CommonExceptionHandler;
 import carzanodev.genuniv.microservices.common.model.dto.ApiError;
 import carzanodev.genuniv.microservices.common.model.dto.StandardResponse;
 import carzanodev.genuniv.microservices.common.util.parser.TimeSlotMapper.ScheduleConflictException;
+import carzanodev.genuniv.microservices.common.util.time.TimestampUtility;
 
 @ControllerAdvice
 public class CustomExceptionHandler extends CommonExceptionHandler {
 
     @ExceptionHandler({DuplicateEnrolmentException.class, ScheduleConflictException.class, CapacityExceededException.class, InexistentCounterException.class})
     public ResponseEntity<StandardResponse<Object>> handleConflictRequests(Exception e, WebRequest request) {
-        ApiError apiError = new ApiError(new Timestamp(System.currentTimeMillis()), HttpStatus.BAD_REQUEST.value(), e.getMessage());
+        ApiError apiError = new ApiError(TimestampUtility.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage());
         StandardResponse<Object> errorResponse = new StandardResponse(apiError);
         return new ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST);
     }
